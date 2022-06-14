@@ -1,0 +1,9 @@
+name: dev-worker-job-backend-fine-ex-mmm-1
+image: okteto/node:14
+command: bash
+sync:
+- .:/usr/src/app
+forward:
+- 9238:9229
+- 3004:3000
+autocreate: true

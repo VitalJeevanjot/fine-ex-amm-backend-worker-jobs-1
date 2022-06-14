@@ -1,0 +1,37 @@
+{
+  "name": "fine-ex-amm-mmm-queue-jobs",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node dist/app.js",
+    "list-tasks": "ts-node controller/cli/view_all_jobs.ts",
+    "remove-tasks": "ts-node controller/cli/remove_all_jobs.ts",
+    "dev": "nodemon app.ts",
+    "build": "tsc -p ."
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.27.2",
+    "bullmq": "^1.81.4",
+    "ccxt": "^1.81.66",
+    "cryptr": "^6.0.3",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "pg": "^8.7.3",
+    "pg-hstore": "^2.3.4",
+    "sequelize": "^6.19.2",
+    "winston": "^3.3.3",
+    "winston-postgres-transport": "git+https://github.com/devindirt/winston-postgres-transport"
+  },
+  "devDependencies": {
+    "@types/axios": "^0.14.0",
+    "@types/express": "^4.17.13",
+    "@types/node": "^16.7.10",
+    "nodemon": "^2.0.12",
+    "ts-node": "^10.2.1",
+    "typescript": "^4.4.2"
+  }
+}
