@@ -39,7 +39,7 @@ async function main () {
     let calculate_price_spread = (get_side === 'buy') ? top_bid_ask - (top_bid_ask / 100 * 5) : top_bid_ask + (top_bid_ask / 100 * 5)
     var get_balance = await exchange.fetchBalance()
     // (for my exchange) the percentage of amount used is base currency, to buy/sell quote
-    let calculated_amount = (get_balance[get_symbol[0]]['free'] / 100) * job.data.spread_percent
+    let calculated_amount = (get_balance[get_symbol[0]]['free'] / 100) * job.data.amount
     if (job.data.taskRecentOrderId === '') {
       let orderId = await exchange.createOrder(
         job.data.symbol,
