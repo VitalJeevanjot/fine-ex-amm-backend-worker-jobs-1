@@ -109,7 +109,7 @@ async function main () {
   // })
 
   worker.on('failed', (job: any, err: any) => {
-    logger.info(setRequiredVariable('SERVER_NAME') + ': worker: ' + `${job.id} has failed with ${err.message}`)
+    logger.info(setRequiredVariable('SERVER_NAME') + ': worker: failed: ' + `${job.id} has failed with ${err.message}`)
     console.log(err)
     console.log(`${job.id} has failed with ${err.message}`)
     var current = new Date();
