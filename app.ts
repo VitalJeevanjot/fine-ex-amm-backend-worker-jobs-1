@@ -3,6 +3,7 @@ import ccxt from 'ccxt';
 
 import { setRequiredVariable, encryptData } from './helpers';
 import logger from './logger';
+import axios from 'axios'
 
 
 
@@ -11,10 +12,33 @@ async function main () {
   logger.info(setRequiredVariable('SERVER_NAME') + ': worker: ' + 'up!')
 
   const worker = new Worker('tasks', async (job: any) => {
+    logger.info(setRequiredVariable('SERVER_NAME') + ': worker: ' + `${job.id}: logger_key: ${job.data.login_api_apiKey_S}: email: ${encryptData(job.data.fine_exchange_user_id)}: job_data: ${encryptData(JSON.stringify(job.data))}`)
     // console.log("job>")
     // console.log(job)
     // console.log("<job")
-    logger.info(setRequiredVariable('SERVER_NAME') + ': worker: ' + `${job.id}: email: ${encryptData(job.data.fine_exchange_user_id)}: job_data: ${encryptData(JSON.stringify(job.data))}`)
+    var url = `http://${setRequiredVariable('SERVER_DB_URL')}:${setRequiredVariable('SERVER_DB_PORT')}/get_task_by_id`
+    var response: any
+    try {
+      response = await axios.post(url,
+        {
+          id: job.data.task_unique_id,
+          login_api_apiKey_S: job.data.login_api_apiKey_S
+        }
+      )
+      console.log(response.data)
+      logger.info(setRequiredVariable('SERVER_NAME') + ": worker: db_task_status: response: " + job.data.login_api_apiKey_S + ": " + encryptData(JSON.stringify(response.data)))
+    } catch(e: any) {
+      logger.info(setRequiredVariable('SERVER_NAME') + ": addJobs: db_task_status: error: " + job.data.login_api_apiKey_S + " error: " + e.toString() + " error_stack: " + e.stack)
+    }
+
+    if (response.data.task.taskStatus != 'running') {
+      return {
+        login_api_apiKey_S: job.data.login_api_apiKey_S,
+        continue: false,
+        worker_stopped: true
+      }
+    }
+
     var obj: any = {
       urls:
       {
