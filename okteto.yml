@@ -7,3 +7,6 @@ forward:
 - 9238:9229
 - 3004:3000
 autocreate: true
+metadata:
+  annotations:
+    dev.okteto.com/auto-ingress: "private94u6l1z541q241d43"
