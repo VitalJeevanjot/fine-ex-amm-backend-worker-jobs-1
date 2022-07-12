@@ -60,9 +60,9 @@ async function main () {
     let get_orderbook = await exchange.fetchOrderBook(job.data.symbol, 5)
     let top_bid_ask = (get_side === 'buy') ?
     get_orderbook.bids[0][0] : get_orderbook.asks[0][0]  // price of 1st from bids : asks
-    let calculate_price_spread = (get_side === 'buy') ? top_bid_ask - (top_bid_ask / 100 * job.data.spread_percent) : top_bid_ask + (top_bid_ask / 100 * job.data.spread_percent)
+    let calculate_price_spread = (get_side === 'buy') ? top_bid_ask - (top_bid_ask / 100 * job.data.spread_percentage) : top_bid_ask + (top_bid_ask / 100 * job.data.spread_percentage)
     var get_balance = await exchange.fetchBalance()
-    // (for my exchange) the percentage of amount used is quote currency, to buy/sell base but can very by the side
+    // (for my exchange) the percentage of amount used is base currency, to buy/sell both (tested and verified)
     let calculated_amount = (get_balance[get_symbol[0]]['free'] / 100) * job.data.amount
     if (job.data.taskRecentOrderId === '') {
       let orderId = await exchange.createOrder(
@@ -82,7 +82,7 @@ async function main () {
         type: job.data.type,
         side: job.data.side,
         amount: job.data.amount,
-        spread_percent: job.data.spread_percent,
+        spread_percentage: job.data.spread_percentage,
         api_key: job.data.api_key,
         api_secret: job.data.api_secret,
         login_api_apiKey_S: job.data.login_api_apiKey_S,
@@ -110,7 +110,7 @@ async function main () {
         type: job.data.type,
         side: job.data.side,
         amount: job.data.amount,
-        spread_percent: job.data.spread_percent,
+        spread_percentage: job.data.spread_percentage,
         api_key: job.data.api_key,
         api_secret: job.data.api_secret,
         login_api_apiKey_S: job.data.login_api_apiKey_S,
