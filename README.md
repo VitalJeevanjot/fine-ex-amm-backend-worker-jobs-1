@@ -1,8 +1,8 @@
 # Fine Exchange AOM: worker
 
-Part of **Fine Exchange AOM**, an automated order manager for market makers that I built for my company, Fine Exchange Ltd, in 2022. The [client repository](https://github.com/VitalJeevanjot/Fine-Exchange-AMM) explains the whole system, with a diagram and the path a task takes through the services.
+Part of **Fine Exchange AOM**, an automated order manager for market makers that I built in 2022 as part of Fine Exchange, my crypto exchange project. The [client repository](https://github.com/VitalJeevanjot/Fine-Exchange-AMM) explains the whole system, with a diagram and the path a task takes through the services.
 
-> **Status: shut down.** Fine Exchange closed in 2022 and the fine.exchange domain has expired, so it's no longer mine. Read the code, but don't run it with real API keys.
+> **Status: ended.** The Fine Exchange project ended in 2022 and the fine.exchange domain has expired, so it's no longer mine. Read the code, but don't run it with real API keys.
 
 Runs the jobs the queue service schedules, and places the orders.
 
